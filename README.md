@@ -2,8 +2,7 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Jint3x/env_plus)
 ![Crates.io](https://img.shields.io/crates/v/env_loader)
 
-## A very simple and highly costumizeable env variable loader. You can specify 
-## your own files that you want to use or use its default settings.
+### A very simple and highly costumizeable env variable loader. You can specify your own files that you want to use or use its default settings.
 ## <br />
 
 

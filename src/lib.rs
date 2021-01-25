@@ -2,7 +2,38 @@
 //! 
 //! The library is extremly simple, but also customizeable and it allows you to set your own value delimiter and comment style.
 //! You can use external config files such as .dotenv too. All you have to do is specify which delimiter and comment style need to be used.
+
+
+//! # Example
 //! 
+//! ### Cargo.toml
+//! ```toml
+//! [dependenices]
+//! env_plus = "0.1.0"
+//! ```
+//! ### .env_plus
+//! ```
+//! // This is a comment!
+//! SECRET=YOUR_SECRET
+//! ```
+
+//! ### main<nolink>.rs
+//! ```rust
+//! use env_plus::EnvLoader;
+//! 
+//! fn main() {
+//!     EnvLoader::new()
+//!     activate();
+//!
+//!     let secret = std::env::var("SECRET").unwrap();
+//!     assert_eq!(secret, String::from("YOUR_SECRET"))
+//! }
+//! ```
+//! 
+//! For more advanced usage, please look at the documentation for each method 
+//! on the EnvLoader struct. There're plenty of examples of how to use this 
+//! library <br />
+
 
 use std::fs;
 mod tests;
@@ -152,7 +183,8 @@ impl EnvLoader {
         self
     }
 
-    /// If true is passed, all current system variables will be rewritten, otherwise they won't.
+    /// If true is passed, all current ENV vars that have the same names as the ones in 
+    /// the file will be overwritten, otherwise they won't.
     /// 
     /// # Examples
     /// 
@@ -231,8 +263,8 @@ fn load_file(envs: EnvLoader) -> bool {
         let unwraped_file = file.unwrap();
         let file_lines = unwraped_file.lines();
 
-        for line in file_lines {
-            load_line(line, &envs.comment, &envs.value_delimiter, &envs.overwrite);
+        for (ind, line) in file_lines.enumerate() {
+            load_line(line, &envs.comment, &envs.value_delimiter, &envs.overwrite, ind);
         };
 
         true
@@ -241,14 +273,14 @@ fn load_file(envs: EnvLoader) -> bool {
 }
 
 
-fn load_line(line: &str, comment: &String, delimiter: &String, overwrite: &bool) {
+fn load_line(line: &str, comment: &String, delimiter: &String, overwrite: &bool, ind: usize) {
     if line.trim().starts_with(comment) || line.trim() == "" { return };
 
     let split_line: Vec<&str> = line.split(comment).collect();
     let main_line = split_line[0];
 
     let key_value: Vec<&str> = main_line.splitn(2, delimiter).collect();
-    if key_value.len() < 2 { panic!("One of the file lines do not appear to have a value.") };
+    if key_value.len() < 2 { panic!("Line {} with content '{}' does not appear to be formatted properly.", ind + 1, line) };
 
     let key = key_value[0];
     let value = key_value[1];

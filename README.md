@@ -1,6 +1,5 @@
 # env_plus <br /> 
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Jint3x/env_plus)
-![Crates.io](https://img.shields.io/crates/v/env_loader)
+![Crates.io](https://img.shields.io/crates/v/env_plus)
 
 ### A very simple and highly costumizeable env variable loader. You can specify your own files that you want to use or use its default settings.
 ## <br />
@@ -13,7 +12,7 @@ Add this to your Cargo.toml:
 
 ```toml
 [dependenices]
-env_plus = "0.1.0"
+env_plus = "0.1.2"
 ```
 
 ### .env_plus
@@ -28,10 +27,10 @@ use env_plus::EnvLoader;
 
 fn main() {
     EnvLoader::new()
-    activate();
+    .activate();
 
     let secret = std::env::var("SECRET").unwrap();
-    assert_eq!(secret, String::from("YOUR_SECRET"))
+    assert_eq!(secret, String::from("YOUR_SECRET"));
 }
 ```
 
@@ -73,6 +72,6 @@ fn main() {
     let secret = std::env::var("SECRET").unwrap();
 
     // SECRET has been overwritten from MY_SECRET to YOUR_SECRET
-    assert_eq!(secret, String::from("YOUR_SECRET"))
+    assert_eq!(secret, String::from("YOUR_SECRET"));
 }
 ```

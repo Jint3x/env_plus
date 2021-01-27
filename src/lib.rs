@@ -9,7 +9,7 @@
 //! ### Cargo.toml
 //! ```toml
 //! [dependenices]
-//! env_plus = "0.1.0"
+//! env_plus = "0.1.2"
 //! ```
 //! ### .env_plus
 //! ```
@@ -23,16 +23,16 @@
 //! 
 //! fn main() {
 //!     EnvLoader::new()
-//!     activate();
+//!     .activate();
 //!
 //!     let secret = std::env::var("SECRET").unwrap();
-//!     assert_eq!(secret, String::from("YOUR_SECRET"))
+//!     assert_eq!(secret, String::from("YOUR_SECRET"));
 //! }
 //! ```
 //! 
 //! For more advanced usage, please look at the documentation for each method 
-//! on the EnvLoader struct. There're plenty of examples of how to use this 
-//! library <br />
+//! on the EnvLoader struct. There're plenty of examples of how to use this
+//! crate.<br />
 
 
 use std::fs;
@@ -77,7 +77,7 @@ impl EnvLoader {
     ///     .activate();
     /// 
     ///     let secret = std::env::var("SECRET").unwrap();
-    ///     assert_eq!(secret, String::from("YOUR_SECRET"))
+    ///     assert_eq!(secret, String::from("YOUR_SECRET"));
     /// }
     /// ```
     /// 
@@ -174,7 +174,7 @@ impl EnvLoader {
     ///     .activate();
     /// 
     ///     let secret = std::env::var("SECRET").unwrap();
-    ///     assert_eq!(secret, String::from("YOUR_SECRET"))
+    ///     assert_eq!(secret, String::from("YOUR_SECRET"));
     /// }
     /// ```
     pub fn change_delimiter(mut self, delimiter: String) ->  Self {
@@ -199,7 +199,7 @@ impl EnvLoader {
     /// use env_plus::EnvLoader;
     /// 
     /// fn main() {
-    ///     std::env::set_var("SECRET", "MY_SECRET")
+    ///     std::env::set_var("SECRET", "MY_SECRET");
     /// 
     ///     EnvLoader::new()
     ///     .overwrite_envs(true)

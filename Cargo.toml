@@ -1,8 +1,9 @@
 [package]
 name = "env_plus"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Jint3x"]
+repository = "https://github.com/Jint3x/env_plus"
 edition = "2018"
-description= "A package used to load ENV variables in your program"
+description= "A very simple crate used to load ENV variables in your program, but can also be customized to load your own files."
 license = "MIT"
 readme = "README.md"
